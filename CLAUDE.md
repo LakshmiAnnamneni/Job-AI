@@ -19,8 +19,8 @@ own `~/.claude/CLAUDE.md` or `.claude/settings.local.json`, not here.
 
 ## Rules
 
-- **Never commit personal data.** `data/` (except `data/jobs.example.csv`), `.env`,
-  `.auth/` are gitignored. Don't force-add them, and don't paste inbox content or
+- **Never commit personal data.** `data/` (except `data/jobs.example.csv`), `resume/`
+  (except `resume/README.md`), `.env`, `.auth/` are gitignored. Don't force-add them, and don't paste inbox content or
   real applications into code, tests, fixtures, or commit messages.
 - **Page objects own selectors.** Specs call page-object methods; no raw locators in
   `tests/`. Prefer `getByRole` / `getByLabel` / `getByTestId`.

@@ -25,6 +25,7 @@ tests/
   unit/                plain-logic tests (tracker CSV)
 test-data/             shareable fixtures (search terms, LinkedIn HAR)
 data/                  YOUR tracker data, gitignored except jobs.example.csv
+resume/                YOUR resumes, gitignored except README.md
 scripts/               setup-gmail-mcp.sh (npm run setup:gmail)
 docs/SETUP.md          full setup, incl. per-person Gmail access
 ```
@@ -35,6 +36,7 @@ docs/SETUP.md          full setup, incl. per-person Gmail access
 |---|---|
 | Code, tests, `CLAUDE.md`, `.claude/settings.json` | `.env`, `.auth/`, `.claude/settings.local.json` |
 | `.env.example`, `data/jobs.example.csv` | `data/jobs.csv` and anything else in `data/` |
+| `resume/README.md` | Your resume files in `resume/` |
 | `scripts/setup-gmail-mcp.sh` | Your Google OAuth client and Gmail MCP config (local scope + keychain) |
 
 ## Setup
