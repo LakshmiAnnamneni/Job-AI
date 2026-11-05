@@ -35,6 +35,8 @@ own `~/.claude/CLAUDE.md` or `.claude/settings.local.json`, not here.
 
 - Columns and `Job Status` values: `src/tracker/schema.ts`. Don't invent new columns or
   statuses without updating the schema and `data/jobs.example.csv`.
+- `Skills` is a `; `-separated list (skills can contain commas). Fill it only from a
+  job's own description; the Gmail importer leaves it blank.
 - Update rows by `Id` with `upsertJobs()` from `src/tracker/csv.ts` so other columns
   aren't wiped. Keep the file UTF-8 with BOM and CRLF (what `writeJobs()` produces).
 - Gmail access is **read-only** (`gmail.readonly` scope). Never send, draft, label,

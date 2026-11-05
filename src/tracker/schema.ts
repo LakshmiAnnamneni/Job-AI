@@ -9,6 +9,7 @@ export const COLUMNS = [
   'Location',
   'Required Qualifications',
   'Preferred Qualifications',
+  'Skills',
   'Pay Range',
   'Travel Required?',
   'Applied (Y/N)',
@@ -16,6 +17,9 @@ export const COLUMNS = [
 ] as const;
 
 export type Column = (typeof COLUMNS)[number];
+
+/** Separator for list-valued cells like Skills ("Agile; Risk, issue & dependency management"). */
+export const LIST_SEPARATOR = '; ';
 export type JobRecord = Record<Column, string>;
 
 /** Allowed values for "Job Status", roughly in pipeline order. */

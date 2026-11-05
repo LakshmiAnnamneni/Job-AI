@@ -1,7 +1,7 @@
-﻿Id,Company Name,Job Title,Job Description,Location,Required Qualifications,Preferred Qualifications,Pay Range,Travel Required?,Applied (Y/N),Job Status
+﻿Id,Company Name,Job Title,Job Description,Location,Required Qualifications,Preferred Qualifications,Skills,Pay Range,Travel Required?,Applied (Y/N),Job Status
 1000000001,Example Corp,Senior IT Project Manager,"Leads cross-functional IT projects end-to-end: scope, schedule, budget, vendors, and risk.","Tampa, FL (Hybrid)","• Bachelor's degree
 • 7+ years of IT project management
 • Agile and Waterfall experience","• PMP certification
-• ERP implementation experience","$110,000 – $130,000",Yes – occasional,Y,Interviewing
+• ERP implementation experience",Project management; Agile; Waterfall; Risk management; Vendor management; Budgeting; Stakeholder communication,"$110,000 – $130,000",Yes – occasional,Y,Interviewing
 1000000002,Sample Industries,Program Manager,Owns a portfolio of infrastructure projects and reports status to leadership.,Remote (US),"• 5+ years managing multiple projects
-• Strong stakeholder communication",• Cloud migration experience,Not listed,No (not mentioned),N,Open
+• Strong stakeholder communication",• Cloud migration experience,Program management; Portfolio management; Cloud migration; Executive reporting,Not listed,No (not mentioned),N,Open

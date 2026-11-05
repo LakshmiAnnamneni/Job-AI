@@ -54,14 +54,20 @@ export function toCsv(records: JobRecord[]): string {
   return BOM + lines.join('\r\n') + '\r\n';
 }
 
+/**
+ * Read the tracker. Columns added to the schema after a file was written read as
+ * blank, so older files keep working; the next writeJobs() adds them. Only Id is required.
+ */
 export function readJobs(file: string): JobRecord[] {
   if (!fs.existsSync(file)) return [];
   const [header, ...rows] = parseCsv(fs.readFileSync(file, 'utf-8'));
-  const missing = COLUMNS.filter((c) => !header?.includes(c));
-  if (missing.length) throw new Error(`${file} is missing columns: ${missing.join(', ')}`);
+  if (!header?.includes('Id')) throw new Error(`${file} has no "Id" column; is it a job tracker CSV?`);
   return rows
     .filter((cells) => cells.some((c) => c.trim() !== ''))
-    .map((cells) => Object.fromEntries(COLUMNS.map((c) => [c, cells[header.indexOf(c)] ?? ''])) as JobRecord);
+    .map((cells) => {
+      const at = (c: string) => header.indexOf(c);
+      return Object.fromEntries(COLUMNS.map((c) => [c, at(c) >= 0 ? (cells[at(c)] ?? '') : ''])) as JobRecord;
+    });
 }
 
 export function writeJobs(file: string, records: JobRecord[]): void {
