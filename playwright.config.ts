@@ -7,6 +7,8 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: isCI, // fail CI if a stray test.only is committed
+  // Tests tagged @external hit third-party sites (e.g. LinkedIn) and run locally only.
+  grepInvert: isCI ? /@external/ : undefined,
   retries: isCI ? 2 : 0,
   workers: isCI ? 1 : undefined,
   reporter: isCI

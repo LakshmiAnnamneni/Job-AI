@@ -39,6 +39,10 @@ npm run report              # open the last HTML report
 npm run typecheck           # TypeScript check without running tests
 ```
 
+Tests tagged **`@external`** (e.g. `tests/e2e/LinkedIn.spec.ts`) hit third-party sites and are
+**excluded in CI** (`grepInvert` in `playwright.config.ts`), so they only run locally. Run just
+those with `npx playwright test --grep @external`.
+
 Tests are **skipped** (not failed) until `BASE_URL` is set. Tests that use `loggedInPage` are
 skipped until `TEST_USERNAME` and `TEST_PASSWORD` are set.
 
