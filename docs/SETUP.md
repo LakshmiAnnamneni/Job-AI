@@ -112,6 +112,22 @@ npm run resume:text -- --password '…' resume/locked.pdf
 Output goes to `resume/` (gitignored). If a PDF is a scanned image with no text layer,
 the script warns that it needs OCR, which pypdf can't do.
 
+### Skills list
+
+```bash
+npm run resume:skills                           # every PDF in resume/ → resume/<name>.skills.txt
+npm run resume:skills -- resume/master.pdf      # specific PDF or .txt files
+npm run resume:skills -- --stdout resume/master.pdf
+npm run resume:skills -- --json resume/master.pdf
+```
+
+Skills come from two places, merged in order of appearance with duplicates removed:
+
+1. Items under a *Skills / Core Competencies / Areas of Expertise / Technical Skills*
+   heading, split on bullets, `|`, `;`, commas and wide column gaps.
+2. Terms from `scripts/skills_vocabulary.txt` mentioned anywhere else (experience,
+   certifications), marked `(mentioned)`. Add your own terms and aliases there.
+
 ## 5. CI (repo maintainers)
 
 GitHub Actions reads `BASE_URL` (repository **variable**) and `TEST_USERNAME` /

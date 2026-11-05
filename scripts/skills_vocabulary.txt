@@ -1,0 +1,118 @@
+# Skills recognized anywhere in a resume (not just its Skills section).
+#
+# Format:  Canonical Name | alias | alias ...
+# - The canonical name is also matched. Matching is on whole words.
+# - Aliases are case-insensitive, EXCEPT ones with a capital after the first letter
+#   (SAFe, SQL, AWS) or prefixed with "=" (=Lean, =Excel), which must match exactly.
+#   That keeps "safe", "lean" or "excel at" from counting as skills.
+# Edit freely; order doesn't matter.
+
+# --- Delivery & methodology ---
+Project Management | project manager | project lifecycle
+Program Management | program manager | programme management
+Portfolio Management | portfolio manager | project portfolio
+PMO | PMO | project management office
+Agile | agile
+Scrum | scrum master | scrum
+Kanban
+Waterfall
+SAFe | SAFe | Scaled Agile | Scaled Agile Framework
+=Lean | =Lean | Lean Six Sigma
+Six Sigma
+ITIL | ITIL
+SDLC | SDLC | software development life cycle | software development lifecycle
+Release Management | release planning
+Roadmapping | roadmap | roadmaps
+Requirements Gathering | requirements analysis | requirements definition
+Business Analysis | business analyst
+Process Improvement | continuous improvement | process optimization
+Governance | project governance | IT governance
+Product Management | product manager
+Product Ownership | product owner
+
+# --- Planning, risk, money, people ---
+Risk Management | risk mitigation | risk assessment
+RAID Management | RAID | RAID log | RAID logs
+Issue Management | issue resolution
+Dependency Management | dependencies
+Change Management | change control
+Organizational Change Management | OCM | organizational change
+Stakeholder Management | stakeholder engagement | stakeholder communication
+Vendor Management | vendor relationships | third-party management | supplier management
+Budget Management | budgeting | budget | cost management | cost control | P&L
+Resource Planning | resource management | capacity planning
+Scheduling | project scheduling | schedule management
+Executive Reporting | status reporting | executive communication | steering committee
+KPIs | KPI | KPIs | metrics
+OKRs | OKR | OKRs
+Cross-functional Leadership | cross-functional | cross functional
+Team Leadership | people management | team building | mentoring
+Negotiation | contract negotiation
+Quality Assurance | QA | quality management
+User Acceptance Testing | UAT | user acceptance testing
+Compliance | regulatory compliance
+SOX | SOX | Sarbanes-Oxley
+HIPAA
+GRC | GRC | governance, risk and compliance
+
+# --- Certifications ---
+PMP | PMP | Project Management Professional
+PMI-ACP | PMI-ACP
+PRINCE2 | PRINCE2
+CSM | CSM | Certified ScrumMaster | Certified Scrum Master
+CSPO | CSPO | Certified Scrum Product Owner
+
+# --- Tools ---
+Jira | Jira | JIRA
+Confluence
+Microsoft Project | MS Project | MSProject
+Smartsheet
+Asana
+Trello
+Monday.com | monday.com
+ServiceNow
+Azure DevOps | Azure DevOps | ADO
+GitHub
+Git | =Git
+Microsoft Excel | =Excel | MS Excel
+Power BI | PowerBI
+Tableau
+Visio
+SharePoint
+Microsoft Office | MS Office | Office 365 | Microsoft 365
+Salesforce
+SAP | SAP
+Oracle
+Workday
+Miro
+
+# --- Technology domains ---
+Cloud Migration | cloud migrations
+Cloud | cloud computing | cloud platforms
+AWS | AWS | Amazon Web Services
+Azure | =Azure | Microsoft Azure
+GCP | GCP | Google Cloud
+DevOps | DevOps
+CI/CD | CI/CD | continuous integration
+Kubernetes
+Docker
+Microservices
+APIs | API | APIs | REST API | REST APIs
+SQL | SQL
+Python
+Java | =Java
+JavaScript
+TypeScript
+Data Analytics | analytics | data analysis
+Machine Learning
+Artificial Intelligence | AI | artificial intelligence
+Generative AI | generative AI | GenAI
+Cybersecurity | cyber security | information security | security
+Infrastructure | IT infrastructure
+System Integration | systems integration | integrations
+Digital Transformation
+Data Migration
+ERP | ERP | enterprise resource planning
+CRM | CRM
+Payments
+FinTech | FinTech | fintech

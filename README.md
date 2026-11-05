@@ -26,7 +26,9 @@ tests/
 test-data/             shareable fixtures (search terms, LinkedIn HAR)
 data/                  YOUR tracker data, gitignored except jobs.example.csv
 resume/                YOUR resumes, gitignored except README.md
-scripts/               extract_resume_text.py (npm run resume:text), setup-gmail-mcp.sh
+scripts/               extract_resume_text.py (npm run resume:text),
+                       extract_resume_skills.py + skills_vocabulary.txt (npm run resume:skills),
+                       setup-gmail-mcp.sh
 tests/python/          Python unit tests (npm run test:py)
 pyproject.toml         Python deps (pypdf), managed by uv
 docs/SETUP.md          full setup, incl. per-person Gmail access

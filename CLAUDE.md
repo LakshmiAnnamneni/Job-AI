@@ -18,6 +18,8 @@ own `~/.claude/CLAUDE.md` or `.claude/settings.local.json`, not here.
 - `npx playwright test <name> --headed`: watch a specific test.
 - `npm run test:py`: Python tests (`tests/python/`, stdlib `unittest`, run via uv).
 - `npm run resume:text`: extract text from PDFs in `resume/` with pypdf.
+- `npm run resume:skills`: skills list from a resume → `resume/<name>.skills.txt`
+  (skills section + terms from `scripts/skills_vocabulary.txt`).
 
 Python is managed by **uv** (`pyproject.toml`, `uv.lock`); add Python deps with `uv add`,
 never `pip install`. Python tests build made-up PDFs; never use a real resume as a fixture.

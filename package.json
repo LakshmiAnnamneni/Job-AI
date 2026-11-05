@@ -13,6 +13,7 @@
     "setup:gmail": "bash scripts/setup-gmail-mcp.sh",
     "tracker:gmail": "tsx src/tracker/gmail-import.ts",
     "resume:text": "uv run scripts/extract_resume_text.py",
+    "resume:skills": "uv run scripts/extract_resume_skills.py",
     "test:py": "uv run python -m unittest discover -s tests/python"
   },
   "devDependencies": {
