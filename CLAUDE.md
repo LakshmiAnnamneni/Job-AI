@@ -16,6 +16,12 @@ own `~/.claude/CLAUDE.md` or `.claude/settings.local.json`, not here.
 - `npm run typecheck`: TypeScript check. Run before every commit.
 - `npm test`: whole suite. `npm run test:smoke` for `@smoke` only.
 - `npx playwright test <name> --headed`: watch a specific test.
+- `npm run test:py`: Python tests (`tests/python/`, stdlib `unittest`, run via uv).
+- `npm run resume:text`: extract text from PDFs in `resume/` with pypdf.
+
+Python is managed by **uv** (`pyproject.toml`, `uv.lock`); add Python deps with `uv add`,
+never `pip install`. Python tests build made-up PDFs; never use a real resume as a fixture.
+Don't print a resume's extracted text into chat or logs unless the user asks.
 
 ## Rules
 

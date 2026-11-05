@@ -96,7 +96,23 @@ only. As of Nov 2026 Google only allows it for Cloud projects enrolled in the
 otherwise tool calls fail with "requires that your Google Cloud project … is enrolled".
 The importer above has no such requirement.
 
-## 4. CI (repo maintainers)
+## 4. Resume text extraction (optional)
+
+Requires [uv](https://docs.astral.sh/uv/). It installs Python and `pypdf` into a
+project-local `.venv/` on first run.
+
+```bash
+npm run resume:text                        # every PDF in resume/ → resume/<name>.txt
+npm run resume:text -- resume/master.pdf   # specific files
+npm run resume:text -- --stdout resume/master.pdf
+npm run resume:text -- --layout            # keep columns/spacing (2-column resumes)
+npm run resume:text -- --password '…' resume/locked.pdf
+```
+
+Output goes to `resume/` (gitignored). If a PDF is a scanned image with no text layer,
+the script warns that it needs OCR, which pypdf can't do.
+
+## 5. CI (repo maintainers)
 
 GitHub Actions reads `BASE_URL` (repository **variable**) and `TEST_USERNAME` /
 `TEST_PASSWORD` (repository **secrets**) under *Settings → Secrets and variables →

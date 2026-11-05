@@ -27,6 +27,11 @@ jobs:
       - name: Type-check
         run: npm run typecheck
 
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Python tests (resume tools)
+        run: npm run test:py
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
