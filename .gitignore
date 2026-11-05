@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Secrets and saved login sessions
+.env
+.auth/
+
+# Playwright output
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
