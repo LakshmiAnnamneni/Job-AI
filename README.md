@@ -39,9 +39,24 @@ npm run report              # open the last HTML report
 npm run typecheck           # TypeScript check without running tests
 ```
 
-Tests tagged **`@external`** (e.g. `tests/e2e/LinkedIn.spec.ts`) hit third-party sites and are
+Tests tagged **`@external`** (e.g. `tests/e2e/LinkedIn.spec.ts`) target third-party sites and are
 **excluded in CI** (`grepInvert` in `playwright.config.ts`), so they only run locally. Run just
 those with `npx playwright test --grep @external`.
+
+### LinkedIn recording (HAR)
+
+The LinkedIn test does **not** hit linkedin.com. It replays a recording saved in
+`test-data/har/linkedin-jobs.har.zip` (via `page.routeFromHAR` in `src/fixtures/index.ts`), and any
+request missing from the recording is blocked rather than sent to the internet.
+
+To re-record from the live site (rarely: LinkedIn rate-limits and blocks repeated automation):
+
+```bash
+LINKEDIN_RECORD=1 npx playwright test LinkedIn --retries=0 --timeout=60000
+```
+
+The current recording (Nov 2026) covers search → Tampa → 50-mile radius. LinkedIn returned
+`429 Too Many Requests` on the following "Date posted" step, so the test stops at distance.
 
 Tests are **skipped** (not failed) until `BASE_URL` is set. Tests that use `loggedInPage` are
 skipped until `TEST_USERNAME` and `TEST_PASSWORD` are set.
