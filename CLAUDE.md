@@ -1,0 +1,43 @@
+# CLAUDE.md
+
+Shared instructions for Claude Code in this repo. Personal preferences belong in your
+own `~/.claude/CLAUDE.md` or `.claude/settings.local.json`, not here.
+
+## What this is
+
+1. **Playwright + TypeScript test suite** (Page Object Model): `src/pages`,
+   `src/components`, `src/fixtures`, `tests/`.
+2. **Job tracker**: applications tracked in `data/jobs.csv`; schema and helpers in
+   `src/tracker/`. Gmail is read via the `gmail-personal` MCP server (see
+   `docs/SETUP.md`).
+
+## Commands
+
+- `npm run typecheck`: TypeScript check. Run before every commit.
+- `npm test`: whole suite. `npm run test:smoke` for `@smoke` only.
+- `npx playwright test <name> --headed`: watch a specific test.
+
+## Rules
+
+- **Never commit personal data.** `data/` (except `data/jobs.example.csv`), `.env`,
+  `.auth/` are gitignored. Don't force-add them, and don't paste inbox content or
+  real applications into code, tests, fixtures, or commit messages.
+- **Page objects own selectors.** Specs call page-object methods; no raw locators in
+  `tests/`. Prefer `getByRole` / `getByLabel` / `getByTestId`.
+- **Specs import `test` and `expect` from `src/fixtures`**, except pure-logic unit tests in
+  `tests/unit/`, which import from `@playwright/test` directly.
+- **Third-party sites:** tag tests `@external`; they're excluded from CI by
+  `playwright.config.ts`. The LinkedIn test replays `test-data/har/linkedin-jobs.har.zip`.
+  Don't run `LINKEDIN_RECORD=1` (live LinkedIn) unless the user explicitly asks;
+  LinkedIn rate-limits and blocks automation.
+
+## Job tracker workflow
+
+- Columns and `Job Status` values: `src/tracker/schema.ts`. Don't invent new columns or
+  statuses without updating the schema and `data/jobs.example.csv`.
+- Update rows by `Id` with `upsertJobs()` from `src/tracker/csv.ts` so other columns
+  aren't wiped. Keep the file UTF-8 with BOM and CRLF (what `writeJobs()` produces).
+- Gmail access is **read-only**. Never send, draft, label, archive, or delete email.
+- When inferring a status from email, use the latest message per application:
+  confirmation → `Applied`, interview/assessment invite → `Interviewing`,
+  offer → `Offer`, rejection → `Rejected`. Say which email each status came from.

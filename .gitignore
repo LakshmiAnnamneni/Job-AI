@@ -5,6 +5,13 @@ node_modules/
 .env
 .auth/
 
+# Personal job-tracker data: only the example file is committed
+data/*
+!data/jobs.example.csv
+
+# Personal Claude Code settings (shared ones live in .claude/settings.json)
+.claude/settings.local.json
+
 # Playwright output
 test-results/
 playwright-report/

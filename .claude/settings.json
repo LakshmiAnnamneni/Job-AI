@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm test)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run test:*)",
+      "Bash(npx playwright test:*)",
+      "Bash(npx playwright show-report:*)",
+      "Bash(npx playwright show-trace:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.auth/**)"
+    ]
+  }
+}

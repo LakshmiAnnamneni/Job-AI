@@ -1,22 +1,41 @@
 # Job AI
 
-End-to-end test suite for Job AI, built with **Playwright** and **TypeScript**, using the Page Object Model.
+End-to-end test suite for Job AI, built with **Playwright** and **TypeScript**, using the
+Page Object Model, plus a small **job tracker** (`data/jobs.csv`) that Claude Code can
+update from Gmail.
+
+**New here? Start with [docs/SETUP.md](docs/SETUP.md).**
 
 ## Layout
 
 ```
 playwright.config.ts   browsers, baseURL, retries, traces, reporters
+CLAUDE.md              shared instructions for Claude Code
+.claude/settings.json  shared Claude Code permissions
 src/
   pages/               page objects: one class per page (locators + actions)
   components/          UI pieces shared across pages (Navbar, ...)
   fixtures/index.ts    custom `test` with page-object and logged-in fixtures
+  tracker/             job tracker schema + CSV read/write/merge helpers
   utils/env.ts         environment settings
 tests/
   auth.setup.ts        logs in once, saves the session to .auth/user.json
   e2e/                 browser tests of full user flows
   api/                 HTTP-level tests (no browser, fast)
-test-data/             JSON inputs for data-driven tests
+  unit/                plain-logic tests (tracker CSV)
+test-data/             shareable fixtures (search terms, LinkedIn HAR)
+data/                  YOUR tracker data, gitignored except jobs.example.csv
+scripts/               setup-gmail-mcp.sh (npm run setup:gmail)
+docs/SETUP.md          full setup, incl. per-person Gmail access
 ```
+
+## What's shared vs. personal
+
+| Committed | Stays on your machine |
+|---|---|
+| Code, tests, `CLAUDE.md`, `.claude/settings.json` | `.env`, `.auth/`, `.claude/settings.local.json` |
+| `.env.example`, `data/jobs.example.csv` | `data/jobs.csv` and anything else in `data/` |
+| `scripts/setup-gmail-mcp.sh` | Your Google OAuth client and Gmail MCP config (local scope + keychain) |
 
 ## Setup
 

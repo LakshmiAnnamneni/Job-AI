@@ -9,7 +9,8 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "report": "playwright show-report",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "setup:gmail": "bash scripts/setup-gmail-mcp.sh"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
