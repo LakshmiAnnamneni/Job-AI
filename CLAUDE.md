@@ -8,8 +8,8 @@ own `~/.claude/CLAUDE.md` or `.claude/settings.local.json`, not here.
 1. **Playwright + TypeScript test suite** (Page Object Model): `src/pages`,
    `src/components`, `src/fixtures`, `tests/`.
 2. **Job tracker**: applications tracked in `data/jobs.csv`; schema and helpers in
-   `src/tracker/`. Gmail is read via the `gmail-personal` MCP server (see
-   `docs/SETUP.md`).
+   `src/tracker/`. Gmail is imported with `npm run tracker:gmail -- --since YYYY-MM-DD`
+   (read-only Gmail API, per-person OAuth client in `.env`; see `docs/SETUP.md`).
 
 ## Commands
 
@@ -37,7 +37,12 @@ own `~/.claude/CLAUDE.md` or `.claude/settings.local.json`, not here.
   statuses without updating the schema and `data/jobs.example.csv`.
 - Update rows by `Id` with `upsertJobs()` from `src/tracker/csv.ts` so other columns
   aren't wiped. Keep the file UTF-8 with BOM and CRLF (what `writeJobs()` produces).
-- Gmail access is **read-only**. Never send, draft, label, archive, or delete email.
+- Gmail access is **read-only** (`gmail.readonly` scope). Never send, draft, label,
+  archive, or delete email, and never widen the scope.
 - When inferring a status from email, use the latest message per application:
   confirmation → `Applied`, interview/assessment invite → `Interviewing`,
-  offer → `Offer`, rejection → `Rejected`. Say which email each status came from.
+  offer → `Offer`, rejection → `Rejected`. Say which email each status came from
+  (`data/gmail-import-report.json` has the evidence).
+- Status rules live in `src/tracker/classify.ts`. When fixing a misclassification, add a
+  case with a **made-up** email to `tests/unit/tracker-classify.spec.ts` first.
+- The sign-in token is `data/.gmail-token.json`. Never print, copy or commit it.

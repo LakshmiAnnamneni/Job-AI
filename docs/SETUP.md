@@ -30,17 +30,16 @@ Read/write/merge helpers are in `src/tracker/csv.ts`.
 
 ## 3. Gmail access (optional, for importing applications)
 
-Claude Code reads Gmail through Google's Gmail MCP server. Google doesn't allow
-automatic client registration, so **each person uses their own Google OAuth client**.
-It's free and takes about 10 minutes.
+`npm run tracker:gmail` reads your job-application emails with the standard Gmail API
+(read-only), works out each application's latest status, and updates `data/jobs.csv`.
+**Each person uses their own Google OAuth client**: free, about 10 minutes, once.
 
 ### 3a. Create a Google OAuth client
 
 In the [Google Cloud Console](https://console.cloud.google.com):
 
 1. **Create a project**, e.g. "Job AI Gmail", and select it.
-2. **APIs & Services → Library**: enable **Gmail API** (and a Gmail MCP entry if one is
-   listed separately).
+2. **APIs & Services → Library**: enable **Gmail API**.
 3. **OAuth consent screen** (a.k.a. *Google Auth Platform*):
    - User type **External**, app name `Job AI`, your email as support/developer contact.
    - **Audience → Test users**: add your own Gmail address.
@@ -50,24 +49,52 @@ In the [Google Cloud Console](https://console.cloud.google.com):
 
 Google's console layout changes over time; the names above may differ slightly.
 
-### 3b. Register it with Claude Code (this project only)
+### 3b. Add the client to your `.env`
 
 ```bash
-npm run setup:gmail
+GOOGLE_CLIENT_ID=1234-abc.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=GOCSPX-...
 ```
 
-The script asks for the client ID, then prompts for the secret (stored in your OS
-keychain, not in any file), and adds the server with `--scope local`, so it's
-available only when Claude Code runs in this folder, and only for you.
+`.env` is gitignored, so your client never reaches the repo.
 
-### 3c. Sign in
+### 3c. Run the importer
 
-Restart Claude Code in this folder → `/mcp` → **gmail-personal** → **Authenticate**.
-Google will say the app is unverified; that's expected for your own Testing-mode
-client, so choose **Continue**.
+```bash
+npm run tracker:gmail -- --since 2026-07-01 --dry-run   # preview, writes nothing
+npm run tracker:gmail -- --since 2026-07-01             # update data/jobs.csv
+```
 
-Then ask Claude, e.g. *"Find the jobs I've applied to in Gmail and update
-data/jobs.csv with their status."*
+- **First run** opens Google sign-in in your browser. Google will say the app is
+  unverified; that's expected for your own Testing-mode client, so choose **Continue**.
+  The sign-in is cached in `data/.gmail-token.json` (gitignored, owner-only).
+- **Personal Gmail accounts sign in again about every 7 days**: Google expires sign-ins
+  for Testing-mode apps. The importer notices and reopens the browser.
+- **Work/school (Google Workspace) accounts** may need an admin to allow the app, or can
+  set the consent screen to *Internal*, which avoids the 7-day expiry.
+
+What it does:
+
+- Searches mail since `--since` (default: last 90 days) for confirmations, interview and
+  assessment invites, rejections and offers, skipping job-alert emails.
+- Groups emails per application (LinkedIn job id, else company + title) and takes the
+  status from the **latest** email: `Applied`, `Interviewing`, `Offer` or `Rejected`.
+- Merges into `data/jobs.csv` by `Id` without wiping columns you filled in, and keeps the
+  previous file as `data/jobs.csv.bak`.
+- Writes `data/gmail-import-report.json`: for every application, the emails (date,
+  subject, sender, Gmail link) its status came from, and `needsReview: true` where the
+  company or title couldn't be read from the email.
+
+Company and title extraction is heuristic (`src/tracker/classify.ts`); review rows marked
+`needsReview` and fix them in the CSV. Later runs keep your fixes.
+
+### Alternative: Gmail MCP server for Claude Code (preview)
+
+`npm run setup:gmail` adds Google's Gmail MCP server to Claude Code for this project
+only. As of Nov 2026 Google only allows it for Cloud projects enrolled in the
+[Workspace Developer Preview Program](https://developers.google.com/workspace/preview);
+otherwise tool calls fail with "requires that your Google Cloud project … is enrolled".
+The importer above has no such requirement.
 
 ## 4. CI (repo maintainers)
 

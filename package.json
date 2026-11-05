@@ -10,15 +10,20 @@
     "test:ui": "playwright test --ui",
     "report": "playwright show-report",
     "typecheck": "tsc",
-    "setup:gmail": "bash scripts/setup-gmail-mcp.sh"
+    "setup:gmail": "bash scripts/setup-gmail-mcp.sh",
+    "tracker:gmail": "tsx src/tracker/gmail-import.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
     "@types/node": "^22.10.0",
     "dotenv": "^16.4.5",
+    "tsx": "^4.23.15",
     "typescript": "^5.6.3"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@googleapis/gmail": "^22.0.2"
   }
 }
